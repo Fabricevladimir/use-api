@@ -1,27 +1,22 @@
 import { useState } from 'react'
 import { validateApiFunction } from './helpers/validateApiFunction'
 
-/**
- * Hook managing API calls
- * @param {Function} apiFunction - API function to be invoked
- * @param {*} [initialState] - Default data
- * @example
- *  const ExampleComponent = () => {
- *    const api = useApi(getUsers, [])
- *
- *    useEffect(() => {
- *    api.request()
- *    }, [])
- *
- *    return api.loading
- *    ? <p>Loading data...</p>
- *    : {api.data.map(user => <p>{user.fullname}</p>)}
- *  }
- */
+
 export function useApi(apiFunction, initialState={}) {
   validateApiFunction(apiFunction);
 
   const [data, setData] = useState(initialState)
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  return {data}
+  async function request(...args) {
+    setLoading(true);
+    const response = await apiFunction(...args);
+    setLoading(false);
+
+    setError(!response.ok);
+    setData(response.data);
+    return response;
+  }
+  return { data, error, loading, request }
 }

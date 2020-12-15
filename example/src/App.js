@@ -1,10 +1,21 @@
-import React from 'react'
 import { useApi } from '@fabrice/use-api'
+import { create } from 'apisauce'
+import React, { useEffect } from 'react'
 
 const App = () => {
-  const example = useApi(() => {})
+  const api = useApi(getUsers, [])
+
+  useEffect(() => {
+    api.request()
+  }, [])
+
+  function getUsers() {
+    const client = create({ baseURL: 'https://jsonplaceholder.typicode.com' })
+    return client.get('/users')
+  }
+
   return (
-    <div />
+    <>{api.data.map(user => <p key={user.id}>{user.name}</p>)}</>
   )
 }
 export default App
