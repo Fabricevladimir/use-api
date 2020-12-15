@@ -13,15 +13,32 @@ npm install --save @fabrice/use-api
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import { useApi } from "@fabrice/use-api";
+import { create } from "apisauce";
+import React, { useEffect } from "react";
 
-import { useMyHook } from '@fabrice/use-api'
+function getUsers() {
+  const client = create({ baseURL: "https://jsonplaceholder.typicode com" });
 
-const Example = () => {
-  const example = useMyHook()
-  return (
-    <div>{example}</div>
-  )
+  return client.get("/users");
+}
+
+function App() {
+  const api = useApi(getUsers, []);
+
+  useEffect(() => {
+    api.request();
+  }, []);
+
+  return loading ? (
+    <p>Loading users...</p>
+  ) : (
+    <>
+      {api.data.map((user) => (
+        <p key={user.id}>{user.name}</p>
+      ))}
+    </>
+  );
 }
 ```
 
