@@ -70,17 +70,18 @@ An object containing the following is returned from the hook:
 - `data` - the data returned from a successful network request (taken from the response's `data` property).
 - `error` - boolean value indicating whether the request was completed successfully. Similarly, this value is derived from the `ok` property on the response.
 - `loading` - boolean value indicating the status of the network request.
-- `request` - asynchronous function that sends the network request and handles the state. Any parameters are forwarded to the given request (`apiFunction`).
+- `request` - asynchronous function that sends the network request and handles the state. Any parameters are forwarded to the function passed into `useApi`. The original response is also returned from the function.
 
 **Example:**
 
 ```javaScript
+// the returned object can also be destructured to pick out individual properties
 const { data, error, loading, request } = useApi(postTodo);
 
 const todo = { title: "New Todo", status: "Not Done" };
 
 // sending the request
-await request(todo, { setting1: 1, option2: 2});
+const response = await request(todo, { setting1: 1, option2: 2});
 ```
 
 ## License
