@@ -1,12 +1,10 @@
 import React from 'react'
-import { useMyHook } from '@fabrice/use-api'
+import { useApi } from '@fabrice/use-api'
 
 const App = () => {
-  const example = useMyHook()
+  const example = useApi(() => {})
   return (
-    <div>
-      {example}
-    </div>
+    <div />
   )
 }
 export default App

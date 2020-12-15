@@ -1,29 +1,33 @@
-import { useMyHook } from './'
-import { renderHook, act } from "@testing-library/react-hooks";
+import { useApi } from './'
+import { renderHook, act } from '@testing-library/react-hooks'
 
-// mock timer using jest
-jest.useFakeTimers();
+const defaultApiFunction = jest.fn();
 
-describe('useMyHook', () => {
-  it('updates every second', () => {
-    const { result } = renderHook(() => useMyHook());
+describe('useApi', () => {
+  function setUp(apiFunction = defaultApiFunction, initialState) {
+    return renderHook(() => useApi(apiFunction, initialState));
+  } 
 
-    expect(result.current).toBe(0);
+  it('should be defined', () => {
+    expect(useApi).toBeDefined()
+  })
 
-    // Fast-forward 1sec
-    act(() => {
-      jest.advanceTimersByTime(1000);
-    });
+  it('should set default initial state when value not provided', () => {
+    const { result } = setUp();
+    expect(result.current.data).toEqual({});
+  })
 
-    // Check after total 1 sec
-    expect(result.current).toBe(1);
+  it('should set initial state with given value', ()=> {
+    const initialState = "abc";
+    const { result } = setUp(undefined, initialState);
+    expect(result.current.data).toBe(initialState);
+  })
 
-    // Fast-forward 1 more sec
-    act(() => {
-      jest.advanceTimersByTime(1000);
-    });
-
-    // Check after total 2 sec
-    expect(result.current).toBe(2);
+  it('should throw Error when apiFunction is not provided', () => {
+    expect(() => useApi()).toThrow(/required/);
+  })
+  
+  it('should throw TypeError when apiFunction is not of function type', () => {
+    expect(() => useApi(1)).toThrow(/type/);
   })
 })
