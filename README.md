@@ -1,4 +1,4 @@
-# @fabrice/use-api
+# use-api
 
 > React hook to manage API calls.
 
@@ -13,26 +13,21 @@ This React hook relies on network requests being made using the [axios](https://
 ### Install
 
 ```bash
-npm install --save @fabrice/use-api
+npm install --save @fabricefrancois/use-api
 ```
 
 ### Usage
 
 ```jsx
+import axios from axios;
 import { useApi } from "@fabrice/use-api";
-import { create } from "apisauce";
 import React, { useEffect } from "react";
 
-function getUsers() {
-  const client = create({ baseURL: "https://jsonplaceholder.typicode com" });
-  return client.get("/users");
-}
-
 function App() {
-  const api = useApi(getUsers, []);
+  const api = useApi(axios.get, []);
 
   useEffect(() => {
-    api.request();
+    api.request('http://jsonplaceholder.typicode.com/users');
   }, []);
 
   return loading ? (
