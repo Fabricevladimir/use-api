@@ -20,7 +20,7 @@ npm install --save @fabricefrancois/use-api
 
 ```jsx
 import axios from axios;
-import { useApi } from "@fabrice/use-api";
+import { useApi } from "@fabricefrancois/use-api";
 import React, { useEffect } from "react";
 
 function App() {
