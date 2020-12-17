@@ -1,8 +1,13 @@
 {
   "name": "@fabricefrancois/use-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React hook to manage API calls.",
   "author": "Fabricevladimir",
+  "keywords": [
+    "react hook",
+    "hook api",
+    "api"
+  ],
   "license": "MIT",
   "repository": "Fabricevladimir/use-api",
   "main": "dist/index.js",

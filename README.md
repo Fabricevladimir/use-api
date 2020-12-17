@@ -2,7 +2,7 @@
 
 > React hook to manage API calls.
 
-[![NPM](https://img.shields.io/npm/v/@fabricefrancois/use-api.svg)](https://www.npmjs.com/package/@fabrice/use-api) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@fabricefrancois/use-api.svg)](https://www.npmjs.com/package/@fabricefrancois/use-api) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Getting Started
 
